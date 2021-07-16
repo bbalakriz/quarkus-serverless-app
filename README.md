@@ -21,19 +21,25 @@ kn service update quarkus-serverless-app --env-from config-map:db-env-cm
 
 
 ### Deploying the native executable:
-=========================================
-```mvn clean package -DskipTests=true -Pnative
+```
+mvn clean package -DskipTests=true -Pnative
 podman build -t quay.io/balki404/quarkus-serverless-app:3.0 -f Dockerfile.native .
 podman push quay.io/balki404/quarkus-serverless-app:3.0
-kn service create quarkus-serverless-app-kn --image quay.io/balki404/quarkus-serverless-app:3.0 --env-from config-map:db-env-cm```
+kn service create quarkus-serverless-app-kn --image quay.io/balki404/quarkus-serverless-app:3.0 --env-from config-map:db-env-cm
+```
 
 For testing locally, run
-```podman run -it -p 8080:8080 --net=host quay.io/balki404/quarkus-app:2.0```
+```
+podman run -it -p 8080:8080 --net=host quay.io/balki404/quarkus-app:2.0
+```
 
 For auto scaling, change the spec for the knative service
 ```
     spec:
       containerConcurrency: 1
 ```
+
 To run it under load, execute
-```siege --concurrent=3 -r1 -H "accept: application/json" --content-type="application/json" 'http://quarkus-app1-quarkus-serverless.apps.cluster-67e6.67e6.sandbox400.opentlc.com/order/getAll'```
+```
+siege --concurrent=3 -r1 -H "accept: application/json" --content-type="application/json" 'http://quarkus-app1-quarkus-serverless.apps.cluster-67e6.67e6.sandbox400.opentlc.com/order/getAll'
+```
