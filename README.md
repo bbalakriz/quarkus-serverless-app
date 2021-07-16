@@ -1,4 +1,6 @@
 # quarkus-serverless-app
+For details about this app, please check out the video - https://youtu.be/Hy2ixKvgabc
+
 ### Deploying using OpenShift extension (using OpenShift internal image registry):
 
 Add the following properties to application.properties
