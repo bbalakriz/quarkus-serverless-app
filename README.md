@@ -1,5 +1,5 @@
 # quarkus-serverless-app
-### Deploying using OpenShift extension:
+### Deploying using OpenShift extension (using OpenShift internal image registry):
 
 Add the following properties to application.properties
 ```
@@ -20,7 +20,7 @@ kn service update quarkus-serverless-app --env-from config-map:db-env-cm
 ```
 
 
-### Deploying the native executable:
+### ### Deploying using OpenShift extension (using external image registry):
 ```
 mvn clean package -DskipTests=true -Pnative
 podman build -t quay.io/balki404/quarkus-serverless-app:3.0 -f Dockerfile.native .
