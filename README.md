@@ -1,6 +1,6 @@
 # quarkus-serverless-app
 ### Deploying using OpenShift extension:
-=========================================
+
 Add the following properties to application.properties
 ```
 quarkus.kubernetes.deployment-target=knative
@@ -13,9 +13,11 @@ quarkus.native.container-runtime=docker
 quarkus.openshift.native-dockerfile=Dockerfile.native
 ```
 
-```oc create configmap db-env-cm --from-literal=db_user=myuser --from-literal=db_password=mypassword --from-literal=db_url=jdbc:mysql://mysql:3306/quarkus --from-literal=db_kind=mysql
+```
+oc create configmap db-env-cm --from-literal=db_user=myuser --from-literal=db_password=mypassword --from-literal=db_url=jdbc:mysql://mysql:3306/quarkus --from-literal=db_kind=mysql
 mvn clean package -DskipTests=true -Pnative -Dquarkus.kubernetes.deploy=true
-kn service update quarkus-serverless-app --env-from config-map:db-env-cm```
+kn service update quarkus-serverless-app --env-from config-map:db-env-cm
+```
 
 
 ### Deploying the native executable:
